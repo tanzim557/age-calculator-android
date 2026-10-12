@@ -1,148 +1,51 @@
-# 📱 Age Calculator - Android App Documentation
+﻿# ðŸ“± Modern Age Calculator & AI Assistant (Android)
 
-A modern, clean, and fully functional **Age Calculator** Android application built with **Kotlin**, **Jetpack Compose (Material 3)**, and **MVVM Architecture**.
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9%2B-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack_Compose-Material_3-4285F4?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/jetpack/compose)
+[![Architecture](https://img.shields.io/badge/Architecture-MVVM-green?style=for-the-badge)](https://developer.android.com/topic/architecture)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
----
-
-## 🌟 Features (মূল সুবিধাসমূহ)
-
-1. **Exact Age Calculation (নিখুঁত বয়স গণনা)**:
-   - Calculates age in **Years, Months, and Days** (e.g., `24 Years, 5 Months, 12 Days`).
-   - Uses `java.time.Period` for accurate date math taking into account variable month lengths and leap years (February 29th).
-
-2. **Next Birthday Countdown (পরবর্তী জন্মদিনের কাউন্টডাউন)**:
-   - Displays exact days remaining until the next birthday.
-   - Shows the exact day of the week (e.g., `Friday`, `Monday`) on which the next birthday falls.
-   - Displays a celebratory `🎂 Happy Birthday! 🎉` banner if today is the user's birthday.
-
-3. **Detailed Lifetime Statistics (জীবনকালের মোট পরিসংখ্যান)**:
-   - **Total Days Lived** (মোট দিন)
-   - **Total Weeks Lived** (মোট সপ্তাহ)
-   - **Total Months Lived** (মোট মাস)
-   - **Total Hours Lived** (মোট ঘণ্টা)
-
-4. **Input Validation & Edge Cases (ভুল ইনপুট প্রতিরোধ)**:
-   - Future date selection prevention (both in Date Picker calendar and runtime checks).
-   - Instant **Reset** button to clear previous calculations.
-
-5. **Modern Material 3 UI/UX (আধুনিক ডিজাইন)**:
-   - Smooth animated transitions for calculation results.
-   - Elevated cards, clean typography, and responsive Light/Dark theme support.
+> A modern, elegant, and production-ready Android utility application built using Kotlin and Jetpack Compose (Material 3). Features ultra-precise age calculations, next birthday countdowns, zodiac astrology breakdowns, and integrated AI assistant advisory.
 
 ---
 
-## 🛠️ Tech Stack & Dependencies (প্রযুক্তি ও লাইব্রেরি)
+## ðŸŒŸ Key Features
 
-| Technology | Purpose |
-| :--- | :--- |
-| **Language** | Kotlin 2.0+ |
-| **UI Framework** | Jetpack Compose with Material 3 |
-| **Architecture** | MVVM (Model-View-ViewModel) + Unidirectional Data Flow (UDF) |
-| **State Management** | Kotlin Coroutines & `StateFlow` |
-| **Date & Time API** | `java.time` (`LocalDate`, `Period`, `ChronoUnit`) |
-| **Compatibility** | Java 8+ Desugaring (`desugar_jdk_libs`) for Android API 24+ support |
-| **Minimum SDK** | API 24 (Android 7.0 Nougat) |
-| **Target SDK** | API 35 (Android 15) |
+- **ðŸŽ¯ Exact Chronological Calculation**: Computes years, months, days, total hours, minutes, and seconds lived.
+- **ðŸŽ‚ Birthday Countdown & Astrology**: Calculates upcoming milestone birthdays, days remaining, and Western/Chinese zodiac insights.
+- **ðŸ¤– Integrated AI Assistant Assistant**: Context-aware AI assistant answering date, age, and astrology queries.
+- **ðŸŽ¨ Material 3 Dynamic Theming**: Full support for Dark Mode and Light Mode with fluid Compose animations.
+- **ðŸ›ï¸ Clean Architecture**: Strict adherence to MVVM (Model-View-ViewModel) with Kotlin Coroutines and StateFlow.
 
 ---
 
-## 🏗️ Architecture & Data Flow (প্রজেক্ট আর্কিটেকচার)
+## ðŸ› ï¸ Tech Stack & Dependencies
 
-The app follows the **MVVM** pattern with Unidirectional Data Flow:
-
-```text
-       ┌──────────────────────────────┐
-       │   AgeCalculatorScreen (UI)   │
-       └──────────────┬───────────────┘
-                      │ (User Events: Pick Date, Click Calculate, Reset)
-                      ▼
-       ┌──────────────────────────────┐
-       │    AgeCalculatorViewModel    │ ◄─── Business Logic & Date Math
-       └──────────────┬───────────────┘
-                      │ (Emits AgeCalculatorUiState via StateFlow)
-                      ▼
-       ┌──────────────────────────────┐
-       │   UI Re-renders with State   │
-       └──────────────────────────────┘
-```
+- **Language**: Kotlin
+- **UI Toolkit**: Jetpack Compose (Material 3)
+- **Architecture**: MVVM with Android ViewModel & StateFlow
+- **Build System**: Gradle Kotlin DSL (uild.gradle.kts)
 
 ---
 
-## 📁 Project Structure (ফাইল পরিচিতি)
+## ðŸš€ Building & Running
 
-```text
-app/src/main/java/com/example/agecalculator/
-│
-├── data/
-│   └── AgeCalculatorModel.kt       # AgeResult and AgeCalculatorUiState data classes
-│
-├── viewmodel/
-│   └── AgeCalculatorViewModel.kt   # Calculation logic, leap-year handling, StateFlow
-│
-├── ui/
-│   ├── theme/
-│   │   ├── Color.kt               # Indigo, Teal, Coral Material 3 color palette
-│   │   ├── Theme.kt               # Dynamic Light & Dark Mode theme configuration
-│   │   └── Type.kt                # Typography definitions
-│   │
-│   ├── components/
-│   │   ├── DatePickerModal.kt     # Material 3 DatePickerDialog with date restrictions
-│   │   ├── HeroAgeCard.kt         # Main Age card displaying Years, Months, Days badges
-│   │   └── StatCards.kt           # 2x2 Grid for Total Days, Weeks, Months, Hours & Next Birthday
-│   │
-│   └── AgeCalculatorScreen.kt     # Scaffold Screen with animated visibility and action buttons
-│
-└── MainActivity.kt                # Application entry point with Edge-to-Edge display
-```
+1. Clone repository:
+   `ash
+   git clone https://github.com/tanzim557/age-calculator-android.git
+   `
+2. Open project in **Android Studio Hedgehog** (or newer).
+3. Let Gradle sync dependencies.
+4. Select target emulator (API 26+) or physical device and click **Run (Shift+F10)**.
 
 ---
 
-## 🧮 Calculation Logic Explained (কীভাবে হিসাব করা হয়)
+## ðŸ‘¤ Author
 
-### 1. Exact Age (Years, Months, Days)
-```kotlin
-val period = Period.between(birthDate, today)
-val years = period.years
-val months = period.months
-val days = period.days
-```
-
-### 2. Lifetime Units
-```kotlin
-val totalDays = ChronoUnit.DAYS.between(birthDate, today)
-val totalMonths = ChronoUnit.MONTHS.between(birthDate, today)
-val totalWeeks = totalDays / 7
-val totalHours = totalDays * 24
-```
-
-### 3. Next Birthday Calculation
-```kotlin
-var nextBdayYear = today.year
-var nextBirthdayDate = safeLocalDate(nextBdayYear, birthDate.monthValue, birthDate.dayOfMonth)
-
-if (nextBirthdayDate.isBefore(today)) {
-    nextBdayYear += 1
-    nextBirthdayDate = safeLocalDate(nextBdayYear, birthDate.monthValue, birthDate.dayOfMonth)
-}
-
-val daysRemaining = ChronoUnit.DAYS.between(today, nextBirthdayDate)
-val dayOfWeek = nextBirthdayDate.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
-```
+Developed by **[Mubassher Alam Tanzim](https://github.com/tanzim557)**  
+GitHub: [@tanzim557](https://github.com/tanzim557) â€¢ Email: mubassheralam0@gmail.com
 
 ---
 
-## 🚀 How to Open and Run the Project
-
-1. Open **Android Studio**.
-2. Click **File $\rightarrow$ Open...** and select the project directory:
-   ```text
-   C:\Users\LIMA\Desktop\mubassira
-   ```
-3. Allow Android Studio to complete the **Gradle Sync**.
-4. Connect an Android Device (or start an Emulator).
-5. Click **Run ▶ (Shift + F10)**.
-
----
-
-## 📄 License
-This project is open-source and available under the **MIT License**.
+## ðŸ“„ License
+This project is licensed under the MIT License.
